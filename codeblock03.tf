@@ -7,7 +7,7 @@
   tags = {
     name         = format("%s%s%s%s", var.customer_code, "sss", var.environment_code, "websrv"),
     resourcetype = "storage"
-    codeblock    = "task02"
+    codeblock    = "codeblock03"
   }
 }
 
