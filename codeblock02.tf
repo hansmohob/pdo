@@ -252,8 +252,8 @@ resource "aws_security_group" "dat01" {
 
   ingress {
     description     = "Data Inbound"
-    from_port       = 0
-    to_port         = 0
+    from_port       = 1421
+    to_port         = 1421
     protocol        = "-1"
     security_groups = [aws_security_group.app01.id]
     self            = true
