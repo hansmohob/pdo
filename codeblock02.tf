@@ -1,5 +1,5 @@
 # Create Internet Gateway
-resource "aws_internet_gateway" "internet_gateway_01" {
+resource ##CORRUPT## "internet_gateway_01" {
   vpc_id = aws_vpc.vpc_01.id
 
   tags = {
@@ -13,7 +13,7 @@ resource "aws_internet_gateway" "internet_gateway_01" {
 
 # Create Subnets
 resource "aws_subnet" "pub_subnet_01" {
-  vpc_id            = aws_vpc.vpc_01.id
+  ##cORRUPT##
   cidr_block        = format("%s.1.0/24", var.vpc_cidr)
   availability_zone = var.az_01
 
@@ -87,7 +87,7 @@ resource "aws_nat_gateway" "nat_gateway_01" {
 }
 
 resource "aws_nat_gateway" "nat_gateway_02" {
-  allocation_id = aws_eip.eip_nat_02.id
+  ##CORRUPT##
   subnet_id     = aws_subnet.pub_subnet_02.id
 
   tags = {
