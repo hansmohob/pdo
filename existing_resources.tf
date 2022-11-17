@@ -36,6 +36,34 @@ resource "aws_subnet" "priv_subnet_04" {
   }
 }
 
+# Create Data Security Group
+resource "aws_security_group" "dat01" {
+  name        = "pdowrk01-release-pdoscgpddat01-WPKF2HZ85WIU"
+  description = "data security group"
+  vpc_id      = aws_vpc.vpc_01.id
+
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+    self            = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+
+  }
+
+  tags = {
+    Name      = format("%s%s%s%s", var.customer_code, "scg", var.environment_code, "dat01")
+    rtype     = "security"
+    codeblock = "network-3tier"
+  }
+}
 # Create Microsoft Managed Active Directory Secrets Manager resources and import pre-created secrets
 resource "aws_secretsmanager_secret" "mmad01" {
   name                    = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "mmad01")
@@ -209,11 +237,17 @@ resource "aws_fsx_windows_file_system" "mmad" {
   skip_final_backup                 = true
   daily_automatic_backup_start_time = "01:00"
   weekly_maintenance_start_time     = "4:16:30"
-  ##CORRUPT##security_group_ids                = [aws_security_group.dat01.id]
+  security_group_ids                = [aws_security_group.dat01.id]
 
   tags = {
     Name         = format("%s%s%s%s", var.customer_code, "fsx", var.environment_code, "mmadsingaz")
     resourcetype = "storage"
     codeblock    = "existing_resources"
   }
+  
+  lifecycle {
+    ignore_changes = [security_group_ids]
+  }
+  
+
 }
