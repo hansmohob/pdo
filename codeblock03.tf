@@ -1,6 +1,6 @@
 # Create S3 bucket for web server files and upload local files
 
-resource "aws_s3_bucket" "websrv" {
+##CORRUPT##
   bucket_prefix = format("%s%s%s%s", var.customer_code, "sss", var.environment_code, "websrv")
   force_destroy = true
 
