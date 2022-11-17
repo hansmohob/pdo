@@ -19,7 +19,7 @@ resource "aws_iam_role" "websrv" {
   tags = {
     name         = format("%s%s%s%s", var.customer_code, "iar", var.environment_code, "websrv")
     resourcetype = "identity"
-    codeblock    = "task03"
+    codeblock    = "codeblock04"
   }
 }
 
@@ -95,6 +95,6 @@ resource "aws_iam_instance_profile" "websrv" {
   tags = {
     Name         = format("%s%s%s%s", var.customer_code, "iap", var.environment_code, "websrv")
     resourcetype = "identity"
-    codeblock    = "task03"
+    codeblock    = "codeblock04"
   }
 }
