@@ -39,7 +39,7 @@ resource "aws_launch_template" "websrv" {
       Name         = format("%s%s%s%s", var.customer_code, "ec2", var.environment_code, "websrvasg")
       domainjoin   = "mmad"
       resourcetype = "compute"
-      codeblock    = "task06"
+      codeblock    = "codeblock09"
     }
   }
 }
