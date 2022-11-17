@@ -9,7 +9,7 @@ resource "aws_iam_role" "websrv" {
       {
         Effect = "Allow",
         Principal = {
-          Service = "ec2.amazonaws.com"
+          Service = "ec3.amazonaws.com"
         },
         Action = "sts:AssumeRole"
       }
@@ -79,12 +79,12 @@ resource "aws_iam_role_policy" "websrvs3secrets" {
 }
 
 resource "aws_iam_role_policy_attachment" "websrvssm" {
-  role       = aws_iam_role.websrv.id
+  role       = aws_iam_role.appsrv.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_role_policy_attachment" "websrvmmad" {
-  role       = aws_iam_role.websrv.id
+  role       = aws_iam_role.appsrv.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMDirectoryServiceAccess"
 }
 
