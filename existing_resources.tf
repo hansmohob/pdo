@@ -45,7 +45,7 @@ resource "aws_security_group" "dat01" {
   ingress {
     from_port       = 80
     to_port         = 80
-    protocol        = "-1"
+    protocol        = "tcp"
     cidr_blocks     = ["0.0.0.0/0"]
     self            = true
   }
@@ -191,7 +191,7 @@ resource "aws_db_instance" "rdsmssql01" {
   character_set_name                    = "SQL_Latin1_General_CP1_CI_AS"
   storage_type                          = "gp2"
   allocated_storage                     = 20
-  max_allocated_storage                 = 100
+  max_allocated_storage                 = 50
   storage_encrypted                     = false
   apply_immediately                     = true
   identifier                            = "mssql01"
@@ -207,10 +207,10 @@ resource "aws_db_instance" "rdsmssql01" {
   delete_automated_backups              = true
   skip_final_snapshot                   = true
   deletion_protection                   = false
-  copy_tags_to_snapshot                 = true
+  copy_tags_to_snapshot                 = false
   performance_insights_enabled          = true
   enabled_cloudwatch_logs_exports       = ["error"]
-  performance_insights_retention_period = 7
+  performance_insights_retention_period = 0
 
   tags = {
     Name         = format("%s%s%s%s", var.customer_code, "rds", var.environment_code, "mssql01")
