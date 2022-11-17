@@ -17,7 +17,7 @@ resource "aws_lb" "websrv" {
     tags = {
       Name         = format("%s%s%s%s", var.customer_code, "alb", var.environment_code, "websrv01")
       resourcetype = "network"
-      codeblock    = "codeblock05"
+      codeblock    = "codeblock06"
     }
 }
 
@@ -38,7 +38,7 @@ resource "aws_lb_target_group" "websrv" {
     tags = {
       Name         = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
       resourcetype = "task05"
-      codeblock    = "codeblock05"
+      codeblock    = "codeblock06"
     }
 }
 
