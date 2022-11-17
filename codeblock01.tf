@@ -7,7 +7,7 @@ resource "aws_resourcegroups_group" "pdo" {
   resource_query {
     query = <<JSON
 {
-  ##CORRUPTED##: [
+  ##CORRUPT##: [
     "AWS::AllSupported"
   ],
   "TagFilters": [
