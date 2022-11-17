@@ -126,7 +126,7 @@ resource "aws_secretsmanager_secret" "rdsmssql01" {
   recovery_window_in_days = 0
 
   tags = {
-    Name         = format("%s%s%s%s", var.customer_code, "scr", var.environment_code, "02")
+    Name         = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "02")
     resourcetype = "security"
     codeblock    = "existing_resources"
   }
