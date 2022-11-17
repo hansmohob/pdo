@@ -6,7 +6,7 @@ resource "aws_vpc_dhcp_options" "mmad01" {
   tags = {
     Name      = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
     rtype     = "network"
-    codeblock = "directoryservices-mmad"
+    codeblock = "codeblock08"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_ssm_document" "domainjoin" {
   tags = {
     Name      = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
     rtype     = "identity"
-    codeblock = "directoryservices-mmad"
+    codeblock = "codeblock08"
   }
 }
 
