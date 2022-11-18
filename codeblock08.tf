@@ -1,12 +1,12 @@
 # Set VPC DHCP options for domain members
 resource "aws_vpc_dhcp_options" "mmad01" {
-  domain_name         = aws_directory_service_directory.mmad01.name
-  domain_name_servers = aws_directory_service_directory.mmad01.dns_ip_addresses
+  domain_name         = ##CORRUPT##
+  domain_name_servers = ##CORRUPT##
 
   tags = {
-    Name      = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
-    rtype     = "network"
-    codeblock = "codeblock08"
+    Name         = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
+    resourcetype = "network"
+    codeblock    = "codeblock08"
   }
 }
 
@@ -28,9 +28,9 @@ resource "aws_ssm_document" "domainjoin" {
           "action" = "aws:domainJoin",
           "name"   = "domainJoin",
           "inputs" = {
-            "directoryId"    = aws_directory_service_directory.mmad01.id,
-            "directoryName"  = aws_directory_service_directory.mmad01.name,
-            "dnsIpAddresses" = aws_directory_service_directory.mmad01.dns_ip_addresses
+            "directoryId"    = ##CORRUPT##
+            "directoryName"  = ##CORRUPT##
+            "dnsIpAddresses" = ##CORRUPT##
           }
         }
       ]
@@ -38,9 +38,9 @@ resource "aws_ssm_document" "domainjoin" {
   )
 
   tags = {
-    Name      = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
-    rtype     = "identity"
-    codeblock = "codeblock08"
+    Name         = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
+    resourcetype = "identity"
+    codeblock    = "codeblock08"
   }
 }
 
