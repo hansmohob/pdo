@@ -4,9 +4,9 @@ resource "aws_vpc_dhcp_options" "mmad01" {
   domain_name_servers = aws_directory_service_directory.mmad01.dns_ip_addresses
 
   tags = {
-    Name      = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
-    rtype     = "network"
-    codeblock = "directoryservices-mmad"
+    Name         = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
+    resourcetype = "network"
+    codeblock    = "directoryservices-mmad"
   }
 }
 
@@ -38,9 +38,9 @@ resource "aws_ssm_document" "domainjoin" {
   )
 
   tags = {
-    Name      = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
-    rtype     = "identity"
-    codeblock = "directoryservices-mmad"
+    Name         = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
+    resourcetype = "identity"
+    codeblock    = "directoryservices-mmad"
   }
 }
 
