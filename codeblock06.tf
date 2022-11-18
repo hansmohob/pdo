@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "websrv" {
   name                          = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
   target_type                   = "instance"
   port                          = 80
-  protocol                      = "HTTP"
+  protocol                      = "TCP"
   vpc_id                        = aws_vpc.vpc_01.id
   load_balancing_algorithm_type = "round_robin"
 
