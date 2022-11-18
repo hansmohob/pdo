@@ -2,7 +2,7 @@
 resource "aws_launch_template" "websrv" {
   name                   = format("%s%s%s%s", var.customer_code, "ltp", var.environment_code, "websrv01")
   description            = "Launch Template for Windows IIS Web server Auto Scaling Group"
-  image_id               = var.ami_id01
+  image_id               = "ami-04e0ebd20d57a72c1"
   instance_type          = "t3.medium"
   key_name               = aws_key_pair.ec2_keypair_01.key_name
   vpc_security_group_ids = [aws_security_group.app01.id]
@@ -20,7 +20,7 @@ resource "aws_launch_template" "websrv" {
     ebs {
       delete_on_termination = true
       volume_size           = 50
-      volume_type           = "gp3"
+      volume_type           = "gp1"
     }
   }
 
