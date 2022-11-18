@@ -17,7 +17,7 @@ resource "aws_lb" "websrv" {
     tags = {
       Name         = format("%s%s%s%s", var.customer_code, "alb", var.environment_code, "websrv01")
       resourcetype = "network"
-      codeblock    = "task05"
+      codeblock    = "codeblock06"
     }
 }
 
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "websrv" {
   name                          = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
   target_type                   = "instance"
   port                          = 80
-  protocol                      = "HTTP"
+  protocol                      = "TCP"
   vpc_id                        = aws_vpc.vpc_01.id
   load_balancing_algorithm_type = "round_robin"
 
@@ -38,17 +38,17 @@ resource "aws_lb_target_group" "websrv" {
     tags = {
       Name         = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
       resourcetype = "task05"
-      codeblock    = "ec2-windows-mmad-websrv"
+      codeblock    = "codeblock06"
     }
 }
 
-resource "aws_lb_listener" "websrv" {
-  load_balancer_arn = aws_lb.websrv.arn
-  port              = "80"
-  protocol          = "HTTP"
+##CORRUPTED## "websrv" {
+##CORRUPTED## 
+##CORRUPTED## 
+##CORRUPTED## 
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.websrv.arn
+##CORRUPTED## 
   }
 }
