@@ -41,14 +41,3 @@ resource "aws_lb_target_group" "websrv" {
       codeblock    = "codeblock06"
     }
 }
-
-resource "aws_lb_listener" "websrv" {
-  load_balancer_arn = aws_lb.websrv.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.websrv.arn
-  }
-}
