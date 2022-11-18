@@ -38,7 +38,7 @@ resource "aws_subnet" "priv_subnet_04" {
 
 # Create Data Security Group
 resource "aws_security_group" "dat01" {
-  name        = "pdowrk01-release-pdoscgpddat01-WPKF2HZ85WIU"
+  name        = "pdoscgpddat01"
   description = "data security group"
   vpc_id      = aws_vpc.vpc_01.id
 
