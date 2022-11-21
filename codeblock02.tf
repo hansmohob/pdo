@@ -247,7 +247,7 @@ resource "aws_security_group" "app01" {
 
 resource "aws_security_group" "dat01" {
   name        = format("%s%s%s%s", var.customer_code, "scg", var.environment_code, "dat01")
-  description = "Data Security Group"
+  description = "data security group"
   vpc_id      = aws_vpc.vpc_01.id
 
   ingress {
