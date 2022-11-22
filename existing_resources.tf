@@ -192,7 +192,7 @@ resource "aws_db_instance" "rdsmssql01" {
   storage_type                          = "gp2"
   allocated_storage                     = 20
   max_allocated_storage                 = 50
-  storage_encrypted                     = false
+  storage_encrypted                     = true
   apply_immediately                     = true
   identifier                            = "mssql01"
   username                              = "admin"
@@ -206,9 +206,10 @@ resource "aws_db_instance" "rdsmssql01" {
   backup_retention_period               = 1
   delete_automated_backups              = true
   skip_final_snapshot                   = true
-  deletion_protection                   = false
+  deletion_protection                   = true
   copy_tags_to_snapshot                 = false
   performance_insights_enabled          = true
+  publicly_accessible                   = false
   enabled_cloudwatch_logs_exports       = ["error"]
 
   tags = {
