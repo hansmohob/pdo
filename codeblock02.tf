@@ -13,7 +13,7 @@ resource ##CORRUPT## "internet_gateway_01" {
 
 # Create Subnets
 resource "aws_subnet" "pub_subnet_01" {
-  ##cORRUPT##
+  ##CORRUPT##
   cidr_block        = format("%s.1.0/24", var.vpc_cidr)
   availability_zone = var.az_01
 
