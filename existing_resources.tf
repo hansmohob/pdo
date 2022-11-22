@@ -210,7 +210,6 @@ resource "aws_db_instance" "rdsmssql01" {
   copy_tags_to_snapshot                 = false
   performance_insights_enabled          = true
   enabled_cloudwatch_logs_exports       = ["error"]
-  performance_insights_retention_period = 0
 
   tags = {
     Name         = format("%s%s%s%s", var.customer_code, "rds", var.environment_code, "mssql01")
