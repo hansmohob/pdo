@@ -7,12 +7,12 @@ resource "aws_resourcegroups_group" "pdo" {
   resource_query {
     query = <<JSON
 {
-  "ResourceTypeFilters": [
+  ##CORRUPT##: [
     "AWS::AllSupported"
   ],
   "TagFilters": [
     {
-      "Key": "customer",
+      "Key": "Customer",
       "Values": ["${var.customer}"]
     }
   ]
