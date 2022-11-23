@@ -1,3 +1,5 @@
+# Use this in M02 TASK01
+
 # EC2 Auto Scaling Group
 resource "aws_autoscaling_group" "websrv" {
   name                    = format("%s%s%s%s", var.customer_code, "asg", var.environment_code, "websrv01")
