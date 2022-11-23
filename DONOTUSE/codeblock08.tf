@@ -1,4 +1,4 @@
-# Use this in M02 TASK01
+# Use this code in M02 TASK01
 
 # EC2 Auto Scaling Group
 resource "aws_autoscaling_group" "websrv" {
