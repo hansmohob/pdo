@@ -1,5 +1,5 @@
 # Create Internet Gateway
-resource "aws_internet_gateway" "internet_gateway_01" {
+resource ##CORRUPT## "internet_gateway_01" {
   vpc_id = aws_vpc.vpc_01.id
 
   tags = {
@@ -13,7 +13,7 @@ resource "aws_internet_gateway" "internet_gateway_01" {
 
 # Create Subnets
 resource "aws_subnet" "pub_subnet_01" {
-  vpc_id            = aws_vpc.vpc_01.id
+  ##CORRUPT##
   cidr_block        = format("%s.1.0/24", var.vpc_cidr)
   availability_zone = var.az_01
 
@@ -87,7 +87,7 @@ resource "aws_nat_gateway" "nat_gateway_01" {
 }
 
 resource "aws_nat_gateway" "nat_gateway_02" {
-  allocation_id = aws_eip.eip_nat_02.id
+  ##CORRUPT##
   subnet_id     = aws_subnet.pub_subnet_02.id
 
   tags = {
@@ -247,14 +247,14 @@ resource "aws_security_group" "app01" {
 
 resource "aws_security_group" "dat01" {
   name        = format("%s%s%s%s", var.customer_code, "scg", var.environment_code, "dat01")
-  description = "Data Security Group"
+  description = "data security group"
   vpc_id      = aws_vpc.vpc_01.id
 
   ingress {
     description     = "Data Inbound"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    from_port       = 1421
+    to_port         = 1421
+    protocol        = "tcp"
     security_groups = [aws_security_group.app01.id]
     self            = true
   }
