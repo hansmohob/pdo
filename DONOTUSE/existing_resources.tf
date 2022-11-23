@@ -210,6 +210,7 @@ resource "aws_db_instance" "rdsmssql01" {
   copy_tags_to_snapshot                 = false
   publicly_accessible                   = false
   performance_insights_enabled          = true
+  auto_minor_version_upgrade            = true
   enabled_cloudwatch_logs_exports       = ["error"]
 
   tags = {
