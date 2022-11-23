@@ -22,7 +22,8 @@ resource "aws_secretsmanager_secret" "ec2_keypair_01" {
   }
 }
 
-resource "aws_secretsmanager_secret_version" "ec2_keypair_01" {
-  secret_id     = aws_secretsmanager_secret.ec2_keypair_01.id
-  secret_string = tls_private_key.ec2_keypair_01.private_key_pem
-}
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
+
