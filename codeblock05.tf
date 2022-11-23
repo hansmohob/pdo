@@ -1,28 +1,54 @@
-#Load Balancer S3 bucket policy https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
-data "aws_iam_policy_document" "websrv" {
-  statement {
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::652711504416:root",
-                     "arn:aws:iam::156460612806:root",
-                     "arn:aws:iam::127311923021:root",
-                     "arn:aws:iam::033677994240:root",
-                     "arn:aws:iam::027434742980:root",
-                     "arn:aws:iam::797873946194:root"]
-    }
+#Load Balancer
+resource "aws_lb" "websrv" {
+  name_prefix        = format("%s%s", var.customer_code, "alb") #cannot be longer than 6 characters
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.web01.id]
+  subnets            = [aws_subnet.pub_subnet_01.id,aws_subnet.pub_subnet_02.id]
 
-    actions = [
-      "s3:PutObject"
-    ]
+  enable_deletion_protection = false
 
-    resources = [
-      aws_s3_bucket.websrv.arn,
-      "${aws_s3_bucket.websrv.arn}/albaccesslogs/*",
-    ]
+  access_logs {
+    bucket  = aws_s3_bucket.websrv.id
+    prefix  = "albaccesslogs"
+    enabled = true
   }
+
+    tags = {
+      Name         = format("%s%s%s%s", var.customer_code, "alb", var.environment_code, "websrv01")
+      resourcetype = "network"
+      codeblock    = "codeblock05"
+    }
 }
 
-##CORRUPTED##
-##CORRUPTED##
-##CORRUPTED##
+resource "aws_lb_target_group" "websrv" {
+  name                          = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
+  target_type                   = "instance"
+  port                          = 80
+  protocol                      = "TCP"
+  vpc_id                        = aws_vpc.vpc_01.id
+  load_balancing_algorithm_type = "round_robin"
+
+  stickiness  {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 86400
+  }
+
+    tags = {
+      Name         = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
+      resourcetype = "task05"
+      codeblock    = "codeblock05"
+    }
+}
+
+##CORRUPTED## "websrv" {
+##CORRUPTED## 
+##CORRUPTED## 
+##CORRUPTED## 
+
+  default_action {
+    type             = "forward"
+##CORRUPTED## 
+  }
 }

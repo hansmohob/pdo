@@ -1,58 +1,33 @@
-# Set VPC DHCP options for domain members
-resource "aws_vpc_dhcp_options" "mmad01" {
-  domain_name         = ##CORRUPT##
-  domain_name_servers = ##CORRUPT##
+# Use this code in M02 TASK01
 
-  tags = {
-    Name         = format("%s%s%s%s%s", var.customer_code, "dhc", var.environment_code, "mmad", "01"),
-    resourcetype = "network"
-    codeblock    = "codeblock08"
+# EC2 Auto Scaling Group
+resource "aws_autoscaling_group" "websrv" {
+  name                    = format("%s%s%s%s", var.customer_code, "asg", var.environment_code, "websrv01")
+  default_cooldown        = 60
+  target_group_arns       = [aws_lb_target_group.websrv.arn]
+  vpc_zone_identifier     = [aws_subnet.priv_subnet_01.id,aws_subnet.priv_subnet_02.id]
+  desired_capacity        = 2
+  max_size                = 4
+  min_size                = 2
+
+  launch_template {
+    id      = aws_launch_template.websrv.id
+    version = "$Latest"
   }
 }
 
-resource "aws_vpc_dhcp_options_association" "mmad01" {
-  vpc_id          = aws_vpc.vpc_01.id
-  dhcp_options_id = aws_vpc_dhcp_options.mmad01.id
-}
+# EC2 Auto Scaling Policy
+resource "aws_autoscaling_policy" "websrv" {
+  name                      = format("%s%s%s%s", var.customer_code, "asp", var.environment_code, "websrv01")
+  policy_type               = "TargetTrackingScaling"
+  autoscaling_group_name    = aws_autoscaling_group.websrv.name
+  estimated_instance_warmup = 100
 
-# Windows Domain join SSM setup
-resource "aws_ssm_document" "domainjoin" {
-  name          = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
-  document_type = "Command"
-  content = jsonencode(
-    {
-      "schemaVersion" = "2.2"
-      "description"   = "Join instances to domain based on tag"
-      "mainSteps" = [
-        {
-          "action" = "aws:domainJoin",
-          "name"   = "domainJoin",
-          "inputs" = {
-            "directoryId"    = ##CORRUPT##
-            "directoryName"  = ##CORRUPT##
-            "dnsIpAddresses" = ##CORRUPT##
-          }
-        }
-      ]
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
     }
-  )
 
-  tags = {
-    Name         = format("%s%s%s%s", var.customer_code, "ssm", var.environment_code, "domainjoin")
-    resourcetype = "identity"
-    codeblock    = "codeblock08"
+    target_value = 80.0
   }
-}
-
-resource "aws_ssm_association" "domainjoin" {
-  name = aws_ssm_document.domainjoin.name
-  targets {
-    key    = "tag:domainjoin"
-    values = ["mmad"]
-  }
-}
-# IAM policy configuration
-resource "aws_iam_role_policy_attachment" "ssm-mmad" {
-  role       = aws_iam_role.websrv.id
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMDirectoryServiceAccess"
 }

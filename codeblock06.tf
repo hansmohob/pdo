@@ -1,43 +1,29 @@
-#Load Balancer
-resource "aws_lb" "websrv" {
-  name_prefix        = format("%s%s", var.customer_code, "alb") #cannot be longer than 6 characters
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.web01.id]
-  subnets            = [aws_subnet.pub_subnet_01.id,aws_subnet.pub_subnet_02.id]
+# Create a private key for use with EC2 instances
 
-  enable_deletion_protection = false
-
-  access_logs {
-    bucket  = aws_s3_bucket.websrv.id
-    prefix  = "albaccesslogs"
-    enabled = true
-  }
-
-    tags = {
-      Name         = format("%s%s%s%s", var.customer_code, "alb", var.environment_code, "websrv01")
-      resourcetype = "network"
-      codeblock    = "codeblock06"
-    }
+resource "tls_private_key" "ec2_keypair_01" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
 }
 
-resource "aws_lb_target_group" "websrv" {
-  name                          = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
-  target_type                   = "instance"
-  port                          = 80
-  protocol                      = "TCP"
-  vpc_id                        = aws_vpc.vpc_01.id
-  load_balancing_algorithm_type = "round_robin"
-
-  stickiness  {
-    enabled         = true
-    type            = "lb_cookie"
-    cookie_duration = 86400
-  }
-
-    tags = {
-      Name         = format("%s%s%s%s", var.customer_code, "ltg", var.environment_code, "websrv01")
-      resourcetype = "task05"
-      codeblock    = "codeblock06"
-    }
+resource "aws_key_pair" "ec2_keypair_01" {
+  key_name   = format("%s%s%s%s", var.customer_code, "akp", var.environment_code, "ec201")
+  public_key = tls_private_key.ec2_keypair_01.public_key_openssh
 }
+
+resource "aws_secretsmanager_secret" "ec2_keypair_01" {
+  name                    = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "ec201")
+  description             = "Amazon EC2 private key"
+  recovery_window_in_days = 0
+
+  tags = {
+    Name        = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "ec201")
+    resourcetype = "security"
+    codeblock   = "codeblock06"
+  }
+}
+
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
+

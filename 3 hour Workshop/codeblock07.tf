@@ -16,9 +16,9 @@ resource "aws_secretsmanager_secret" "ec2_keypair_01" {
   recovery_window_in_days = 0
 
   tags = {
-    Name        = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "ec201")
-    resourcetype = "security"
-    codeblock   = "codeblock06"
+    Name      = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "ec201")
+    rtype     = "security"
+    codeblock = "codeblock07"
   }
 }
 
@@ -26,4 +26,3 @@ resource "aws_secretsmanager_secret" "ec2_keypair_01" {
 ##CORRUPTED##
 ##CORRUPTED##
 ##CORRUPTED##
-
