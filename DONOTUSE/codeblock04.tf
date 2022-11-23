@@ -9,7 +9,7 @@ resource "aws_iam_role" "websrv" {
       {
         Effect = "Allow",
         Principal = {
-          Service = "ec2.amazonaws.com"
+          Service = "ec3.amazonaws.com"
         },
         Action = "sts:AssumeRole"
       }
@@ -19,7 +19,7 @@ resource "aws_iam_role" "websrv" {
   tags = {
     name         = format("%s%s%s%s", var.customer_code, "iar", var.environment_code, "websrv")
     resourcetype = "identity"
-    codeblock    = "task03"
+    codeblock    = "codeblock04"
   }
 }
 
@@ -79,12 +79,12 @@ resource "aws_iam_role_policy" "websrvs3secrets" {
 }
 
 resource "aws_iam_role_policy_attachment" "websrvssm" {
-  role       = aws_iam_role.websrv.id
+  role       = aws_iam_role.appsrv.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_role_policy_attachment" "websrvmmad" {
-  role       = aws_iam_role.websrv.id
+  role       = aws_iam_role.appsrv.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMDirectoryServiceAccess"
 }
 
@@ -95,6 +95,6 @@ resource "aws_iam_instance_profile" "websrv" {
   tags = {
     Name         = format("%s%s%s%s", var.customer_code, "iap", var.environment_code, "websrv")
     resourcetype = "identity"
-    codeblock    = "task03"
+    codeblock    = "codeblock04"
   }
 }
