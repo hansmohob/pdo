@@ -21,3 +21,8 @@ resource "aws_secretsmanager_secret" "ec2_keypair_01" {
     codeblock = "codeblock07"
   }
 }
+
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
+##CORRUPTED##
