@@ -17,8 +17,8 @@ resource "aws_secretsmanager_secret" "ec2_keypair_01" {
 
   tags = {
     Name        = format("%s%s%s%s", var.customer_code, "sms", var.environment_code, "ec201")
-    resourctype = "security"
-    codeblock   = "landingzone-base"
+    resourcetype = "security"
+    codeblock   = "codeblock06"
   }
 }
 
