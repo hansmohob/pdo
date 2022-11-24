@@ -15,7 +15,7 @@ This code is used within an AWS workshop showing customers how to build Microsof
 - **az_03 (string)**: Availability Zone 3
 - **ami_id01 (string)**: AMI ID for Amazon provided Microsoft Windows Server 2022 base
 - **environment (string)**: Environment name tag
-- **customer (string)**: Customer Name tag
+- **customer (string)**: Customer name tag
 
 
 ## Usage
