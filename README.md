@@ -1,5 +1,5 @@
 # ENT303 Workshop: Use Terraform to Build Microsoft Infrastructure on AWS (2 hour)
-This code is used within an AWS workshop showing customers how to use Terraform to build Microsoft infrastructure on AWS.
+This code is used by an AWS workshop showing customers how to build Microsoft infrastructure on AWS with Terraform.
 
 ## Providers
 
@@ -24,4 +24,3 @@ This code is used within an AWS workshop showing customers how to use Terraform 
 
 
 ## Outputs
-
