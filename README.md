@@ -20,7 +20,8 @@ This code is used within an AWS workshop showing customers how to build Microsof
 
 ## Usage
 
-:warning: **Warning**: This code is not designed for consumption outside of an AWS workshop setting. It relies on pre-provisioned resources, contains errors and lacks production security controls.
-
+:warning: **Warning**: This code is not designed for consumption outside of an AWS workshop setting. It contains errors, relies on pre-provisioned resources and lacks production security controls.
 
 ## Outputs
+
+none
